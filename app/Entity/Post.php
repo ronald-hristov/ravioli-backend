@@ -1,0 +1,118 @@
+<?php declare(strict_types=1);
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table(name="posts")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Post
+{
+
+    use IdTrait;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    protected $content;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    protected $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="posts")
+     *
+     * @var User
+     */
+    protected $user;
+
+    use DatesTrait;
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Post
+     */
+    public function setTitle(string $title): Post
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     * @return Post
+     */
+    public function setContent(string $content): Post
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     * @return Post
+     */
+    public function setImage(string $image): Post
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Post
+     */
+    public function setUser(User $user): Post
+    {
+        $this->user = $user;
+        return $this;
+    }
+}

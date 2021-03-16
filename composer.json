@@ -7,7 +7,8 @@
         "ext-pdo":"*",
         "monolog/monolog": "^1.24",
         "bryanjhv/slim-session": "~3.0",
-        "php-curl-class/php-curl-class": "^8.6"
+        "php-curl-class/php-curl-class": "^8.6",
+        "doctrine/orm": "^2.7"
     },
     "autoload": {
         "psr-4": {

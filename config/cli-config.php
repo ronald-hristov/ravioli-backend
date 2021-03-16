@@ -1,4 +1,8 @@
 <?php
+// Required for doctrine console commands
+
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+
 define('APP_PATH', __DIR__ . '/../app');
 define('ROOT_PATH', __DIR__ . '/..');
 define('DATA_PATH', __DIR__ . '/../app/data');
@@ -15,8 +19,6 @@ if (PHP_SAPI == 'cli-server') {
 
 require ROOT_PATH . '/vendor/autoload.php';
 
-session_start();
-
 // Instantiate the app
 $settings = require ROOT_PATH . '/config/settings.php';
 $app = new \Slim\App($settings);
@@ -24,11 +26,7 @@ $app = new \Slim\App($settings);
 // Set up dependencies
 require ROOT_PATH . '/config/dependencies.php';
 
-// Register middleware
-require ROOT_PATH . '/config/middleware.php';
 
-// Register routes
-require ROOT_PATH . '/config/routes.php';
-
-// Run app
-$app->run();
+/** @var \Doctrine\ORM\EntityManager $em */
+$em = $app->getContainer()->get('em');
+return ConsoleRunner::createHelperSet($em);

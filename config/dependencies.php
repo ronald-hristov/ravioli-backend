@@ -5,7 +5,6 @@
 
 $container = $app->getContainer();
 
-
 $container['logger'] = function ($c) {
     $logger = new \Monolog\Logger('my_logger');
     $fileHandler = new \Monolog\Handler\StreamHandler(ROOT_PATH . '/log/app.log');
@@ -20,3 +19,5 @@ $container['view'] = function ($c) {
 
     return $phpView;
 };
+
+$container['em'] = function ($c) {return \App\Factory\EntityManagerFactory::create($c);};
