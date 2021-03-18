@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="posts")
  * @ORM\HasLifecycleCallbacks
  */
-class Post
+class Post implements \JsonSerializable
 {
 
     use IdTrait;
@@ -114,5 +114,17 @@ class Post
     {
         $this->user = $user;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'image' => $this->getImage(),
+            'content' => $this->getContent(),
+            'author' => $this->getUser()->getName(),
+            'date' => $this->getDateCreated()->format('Y-m-d H:i:s'),
+        ];
     }
 }

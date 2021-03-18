@@ -3,3 +3,5 @@
 /.idea
 /log/*.log
 /data
+/var
+!/var/README.md

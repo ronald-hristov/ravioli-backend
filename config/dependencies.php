@@ -21,3 +21,4 @@ $container['view'] = function ($c) {
 };
 
 $container['em'] = function ($c) {return \App\Factory\EntityManagerFactory::create($c);};
+$container['session'] = function ($c) {return new \SlimSession\Helper;};

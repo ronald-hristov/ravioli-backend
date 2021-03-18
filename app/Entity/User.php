@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users")
  * @ORM\HasLifecycleCallbacks
  */
-class User
+class User implements \JsonSerializable
 {
     use IdTrait;
 
@@ -23,7 +23,7 @@ class User
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      *
      * @var string
      */
@@ -37,7 +37,7 @@ class User
     protected $password;
 
     /**
-    @ORM\Column(type="AccountType")
+    @ORM\Column(type="UserRole")
      *
      * @var string
      */
@@ -54,10 +54,14 @@ class User
 
     /**
      * User constructor.
+     * @param $name
+     * @param $email
      */
-    public function __construct()
+    public function __construct($name, $email)
     {
         $this->posts = new ArrayCollection();
+        $this->name = $name;
+        $this->email = $email;
     }
 
     /**
@@ -148,5 +152,15 @@ class User
     {
         $this->posts = $posts;
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->getId(),
+            'email' => $this->getEmail(),
+            'name' => $this->getName(),
+            'role' => $this->getRole(),
+        ];
     }
 }
