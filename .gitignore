@@ -5,3 +5,5 @@
 /data
 /var
 !/var/README.md
+/public/img/article
+!/public/img/article/README.md
