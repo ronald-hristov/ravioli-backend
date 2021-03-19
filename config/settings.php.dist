@@ -3,6 +3,7 @@ return [
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
+        'determineRouteBeforeAppMiddleware' => true,
         'doctrine' => [
             // if true, metadata caching is forcefully disabled
             'dev_mode' => true,
@@ -18,7 +19,6 @@ return [
 
             ],
             'proxy_dir' => ROOT_PATH . '/var/doctrine/proxies',
-
 
             'connection' => [
                 'driver' => 'pdo_mysql',
