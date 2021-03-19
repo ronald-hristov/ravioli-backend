@@ -1,0 +1,1 @@
+Holds cover images of uploaded posts

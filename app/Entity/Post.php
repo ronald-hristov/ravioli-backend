@@ -22,7 +22,7 @@ class Post implements \JsonSerializable
     protected $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      *
      * @var string
      */
@@ -41,6 +41,17 @@ class Post implements \JsonSerializable
      * @var User
      */
     protected $user;
+
+    /**
+     * Post constructor.
+     * @param string $title
+     * @param string $content
+     */
+    public function __construct(string $title, string $content)
+    {
+        $this->title = $title;
+        $this->content = $content;
+    }
 
     use DatesTrait;
 
@@ -124,6 +135,7 @@ class Post implements \JsonSerializable
             'image' => $this->getImage(),
             'content' => $this->getContent(),
             'author' => $this->getUser()->getName(),
+            'authorId' => $this->getUser()->getId(),
             'date' => $this->getDateCreated()->format('Y-m-d H:i:s'),
         ];
     }
